@@ -1,20 +1,34 @@
-import core from '@actions/core'
-import { wait } from './wait'
-
+import{ getInput, setFailed } from '@actions/core'
+import { getOctokit, context as GitHubContext } from "@actions/github"
+import { addLabels, getPrNumber } from './helper'
 
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
+    const token = getInput("repo-token", { required: true });
 
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
+    const prNumber = getPrNumber();
+    if (!prNumber) {
+      console.log("Could not get pull request number from context, exiting")
+      return;
+    }
+    console.info(`PrNumber=${prNumber}`)
 
-    core.setOutput('time', new Date().toTimeString());
+    const client = getOctokit(token)
+
+    const { data: pullRequest } = await client.pulls.get({
+      owner: GitHubContext.repo.owner,
+      repo: GitHubContext.repo.repo,
+      pull_number: prNumber
+    })
+
+    console.info(pullRequest)
+
+    await addLabels(client, prNumber, [
+      'Hello World'
+    ])
   } catch (error) {
-    core.setFailed(error.message);
+    setFailed(error.message);
   }
 }
 
