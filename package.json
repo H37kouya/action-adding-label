@@ -4,6 +4,7 @@
   "description": "JavaScript Action Template",
   "main": "index.js",
   "scripts": {
+    "build": "tsc && ncc build lib/main.js",
     "lint": "eslint .",
     "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
     "test": "jest",
@@ -25,11 +26,16 @@
   },
   "homepage": "https://github.com/actions/javascript-action#readme",
   "dependencies": {
-    "@actions/core": "^1.2.5"
+    "@actions/core": "^1.2.5",
+    "@actions/github": "^4.0.0"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "@types/node": "^12.20.1",
     "@vercel/ncc": "^0.27.0",
     "eslint": "^7.4.0",
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.3",
+    "typescript": "^4.2.3"
   }
 }

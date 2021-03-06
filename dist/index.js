@@ -1,31 +1,63 @@
-require('./sourcemap-register.js');module.exports =
+module.exports =
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 932:
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const core = __nccwpck_require__(186);
-const wait = __nccwpck_require__(312);
+/***/ 109:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const core_1 = __importDefault(__nccwpck_require__(186));
+const wait_1 = __nccwpck_require__(817);
 // most @actions toolkit packages have async methods
-async function run() {
-  try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
-
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
-
-    core.setOutput('time', new Date().toTimeString());
-  } catch (error) {
-    core.setFailed(error.message);
-  }
+function run() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const ms = core_1.default.getInput('milliseconds');
+            core_1.default.info(`Waiting ${ms} milliseconds ...`);
+            core_1.default.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
+            yield wait_1.wait(parseInt(ms));
+            core_1.default.info((new Date()).toTimeString());
+            core_1.default.setOutput('time', new Date().toTimeString());
+        }
+        catch (error) {
+            core_1.default.setFailed(error.message);
+        }
+    });
 }
-
 run();
+
+
+/***/ }),
+
+/***/ 817:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.wait = void 0;
+let wait = function (milliseconds) {
+    return new Promise((resolve) => {
+        if (typeof milliseconds !== 'number') {
+            throw new Error('milliseconds not a number');
+        }
+        setTimeout(() => resolve("done!"), milliseconds);
+    });
+};
+exports.wait = wait;
 
 
 /***/ }),
@@ -33,7 +65,6 @@ run();
 /***/ 351:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
-"use strict";
 
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
@@ -119,7 +150,6 @@ function escapeProperty(s) {
 /***/ 186:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
-"use strict";
 
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -364,7 +394,6 @@ exports.getState = getState;
 /***/ 717:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
-"use strict";
 
 // For internal use, subject to change.
 var __importStar = (this && this.__importStar) || function (mod) {
@@ -400,7 +429,6 @@ exports.issueCommand = issueCommand;
 /***/ 278:
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 // We use any as a valid input type
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -423,27 +451,9 @@ exports.toCommandValue = toCommandValue;
 
 /***/ }),
 
-/***/ 312:
-/***/ ((module) => {
-
-let wait = function (milliseconds) {
-  return new Promise((resolve) => {
-    if (typeof milliseconds !== 'number') {
-      throw new Error('milliseconds not a number');
-    }
-    setTimeout(() => resolve("done!"), milliseconds)
-  });
-};
-
-module.exports = wait;
-
-
-/***/ }),
-
 /***/ 747:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("fs");;
 
 /***/ }),
@@ -451,7 +461,6 @@ module.exports = require("fs");;
 /***/ 87:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("os");;
 
 /***/ }),
@@ -459,7 +468,6 @@ module.exports = require("os");;
 /***/ 622:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("path");;
 
 /***/ })
@@ -502,7 +510,6 @@ module.exports = require("path");;
 /******/ 	// module exports must be returned from runtime so entry inlining is disabled
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	return __nccwpck_require__(932);
+/******/ 	return __nccwpck_require__(109);
 /******/ })()
 ;
-//# sourceMappingURL=index.js.map
