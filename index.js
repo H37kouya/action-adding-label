@@ -1,5 +1,5 @@
 const core = require('@actions/core');
-const wait = require('./wait');
+const wait = require('./src/wait');
 
 
 // most @actions toolkit packages have async methods
