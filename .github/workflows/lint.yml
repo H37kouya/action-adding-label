@@ -26,3 +26,4 @@ jobs:
         with:
           prettier: true
           auto_fix: true
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
