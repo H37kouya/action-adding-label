@@ -2,7 +2,6 @@
   "name": "javascript-action",
   "version": "1.0.0",
   "description": "JavaScript Action Template",
-  "main": "index.js",
   "scripts": {
     "build": "tsc && ncc build lib/main.js",
     "lint": "eslint .",
