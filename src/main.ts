@@ -19,7 +19,7 @@ async function run() {
     const { data: pullRequest } = await client.pulls.get({
       owner: GitHubContext.repo.owner,
       repo: GitHubContext.repo.repo,
-      pull_number: prNumber
+      pull_number: prNumber,
     });
 
     console.info(pullRequest);

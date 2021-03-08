@@ -10,7 +10,7 @@ export const addLabels = async (
     owner: GitHubContext.repo.owner,
     repo: GitHubContext.repo.repo,
     issue_number: prNumber,
-    labels: labels
+    labels: labels,
   });
 };
 
